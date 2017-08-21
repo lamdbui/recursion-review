@@ -6,5 +6,17 @@
 // But instead we're going to implement it from scratch:
 var getElementsByClassName = function(className
 ) {
-  // your code here
+  var results = [];
+  (function nodeRecurse(node) {
+    if (node.classList.contains(className)) {
+      results.push(node);
+    }
+    node.childNodes.forEach(function(childNode) {
+      if (childNode.classList) {
+        nodeRecurse(childNode);
+      }
+    }); 
+  })(document.body);  
+
+  return results;
 };
